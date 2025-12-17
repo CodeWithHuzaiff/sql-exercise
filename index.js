@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const express = require('express');
 const app = express();
 const path = require('path');
-const uuid = require('uuid');
+const {v4:uuidv4}=require('uuid');
 const methodOverride = require('method-override');
 
 app.use(methodOverride('_method'));
@@ -144,6 +144,25 @@ app.patch("/user/:id",(req,res)=>{
   })
 
 
+
+app.get("/user/new",(req,res)=>{
+    res.render("new.ejs");
+});
+
+app.post("/user",(req,res)=>{
+    let {username,email,password}=req.body;
+    let id=uuidv4();
+    q="INSERT INTO user (id,username,email,password) VALUES (?,?,?,?) ";
+    let data=[id,username,email,password];
+    connection.query(q,data,(err,result)=>{
+        if (err) {
+            console.error("FULL ERROR OBJECT:", err);
+            res.send("Some Error in DB");
+            return;
+          }
+          res.redirect("/user");
+    })
+})
 
 
 

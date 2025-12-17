@@ -3,15 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit-user</title>
+    <title>Edit User</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .edit-container {
+            background: #ffffff;
+            padding: 30px 35px;
+            border-radius: 8px;
+            width: 380px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .edit-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .edit-container p {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+        }
+
+        textarea:focus,
+        input:focus {
+            border-color: #007bff;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h2>Edit the User under:<%= data.email %></h2>
-    <form method="post" action="/user/<%=data.id%>?_method=PATCH">
-        <textarea name="username" id=""><%= data.username%></textarea>
-        <input type="password" name="password" placeholder="Enter password">
-        <button>Edit</button>
-    </form>
+
+    <div class="edit-container">
+        <h2>Edit User</h2>
+        <p><strong><%= data.email %></strong></p>
+
+        <form method="post" action="/user/<%= data.id %>?_method=PATCH">
+            <textarea name="username" rows="2"><%= data.username %></textarea>
+
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <button class="btn">Update User</button>
+        </form>
+    </div>
 
 </body>
 </html>
